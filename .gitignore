@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # data
-./export/*.csv
-./figures/*.png
+/export/*.csv
+/figures/*.png

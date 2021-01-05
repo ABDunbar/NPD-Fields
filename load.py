@@ -74,3 +74,19 @@ def load(key):
             df = df.drop(column, axis=1)
 
     return df
+
+
+# Function to calculate reserves / volumes
+def calculate(fields, df, column='fldName'):
+    """
+    fields: pd.Series.  Need to convert to list in order to iterate.
+    df    : DataFrame from which to calculate either In place volumes or Reserves
+    column: Column containing the field names, currently 'fldName' but could change from NPD
+    """
+    volumes = pd.DataFrame()    
+    for field in list(fields):        
+        if field in list(df[column]):            
+            volumes = volumes.append(df[df[column]==field])
+            
+    volumes.loc['Total'] = volumes.sum(numeric_only=True, axis=0)
+    return volumes
